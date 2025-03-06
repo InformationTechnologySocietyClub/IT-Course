@@ -1,3 +1,5 @@
+/* animation.css */
+
 .card {
     opacity: 0;
     transform: translateY(50px);
@@ -8,3 +10,42 @@
     opacity: 1;
     transform: translateY(0);
 }
+
+h1, h2, h3 {
+    transition: color 1s ease, transform 1s ease;
+}
+
+h1:hover, h2:hover, h3:hover {
+    color: #7DDF64;
+    transform: scale(1.1);
+}
+
+/* Hover effect for the logo */
+.logo-container {
+    position: relative;
+    width: 30%;
+    height: auto;
+}
+
+.logo-container img {
+    width: 100%;
+    height: auto;
+    border-radius: 5px;
+    transition: opacity 0.5s ease;
+}
+
+.logo-container img.its-logo {
+    position: absolute;
+    top: 0;
+    left: 0;
+    opacity: 0;
+}
+
+.logo-container:hover img.club-logo {
+    opacity: 0;
+}
+
+.logo-container:hover img.its-logo {
+    opacity: 1;
+}
+
