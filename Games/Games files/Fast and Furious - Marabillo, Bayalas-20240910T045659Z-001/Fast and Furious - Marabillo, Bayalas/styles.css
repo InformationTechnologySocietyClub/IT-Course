@@ -1,0 +1,86 @@
+body {
+    margin: 0;
+    background-color: #1a1a1a;
+    color: #fff;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    overflow: hidden;
+    background-image: url('bgtokyo.jpg');
+    background-size:contain;
+    background-repeat:repeat;
+}
+
+#gameArea {
+    background-color: #1a1a1a;
+    position: relative;
+    width: 300px;
+    height: 500px;
+    background-image: url('Road.png'); /* Use a highway image */
+    background-size: cover;
+    background-repeat: no-repeat;
+    overflow: hidden;
+    border-radius: 10px;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.7);
+    border: 2px solid #ffffff;
+}
+
+#player {
+    position: absolute;
+    width: 30px;
+    height: 50px; /* Adjust height to match the player's image */
+    background-image: url('player.png');
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+    bottom: 10px;
+    left: 50%;
+    border-radius: 10px;
+    transform: translateX(-50%);
+}
+
+.obstacle {
+    position: absolute;
+    border-radius: 10px;
+    width: 30px; /* Adjust to match the truck's image */
+    height: 50px; /* Adjust to match the truck's image */
+    background-image: url('truck.png');
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+    top: 0;
+}
+
+#score {
+    position: absolute;
+    top: 10px;
+    left: 10px;
+    font-size: 20px;
+    font-weight: bold;
+    z-index: 100;
+}
+
+.controls {
+    z-index: 100;
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    display: inline-block;
+    flex-direction: column;
+}
+
+button {
+    background: none;
+    border: none;
+    color: #fff;
+    font-size: 24px;
+    cursor: pointer;
+    margin-bottom: 5px;
+    transition: color 0.3s ease;
+}
+
+button:hover {
+    color: #4CAF50;
+}

@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tokyo Drift - JS game</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div id="gameArea">
+        <div id="player"></div>
+        <div id="score">Score: 0</div>
+        <div class="controls">
+            <button id="muteButton"><i class="fa fa-volume-up" aria-hidden="true"></i></button>
+            <button id="restartButton"><i class="fa fa-redo"></i></button>   
+            <button id="startButton"><i class="fa fa-play-circle" aria-hidden="true"></i></button>
+        </div>
+    </div>
+    <audio id="bgMusic" loop>
+        <source src="Tokyomusiclyrics.mp3" type="audio/mp3">
+    </audio>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/js/all.min.js"></script>
+    <script src="game.js"></script>
+</body>
+</html>
