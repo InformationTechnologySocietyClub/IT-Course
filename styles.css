@@ -117,14 +117,14 @@ header h1 {
     font-size: 1.1em;
 }
 
-.card {
+.aboutcard {
     width: 100%;
     height: 300px;
     background: #15001f;
     border: 1px solid #c042ff;
     font-size: 14px;
     font-family: monospace;
-    overflow: auto;
+    overflow: hidden;
 }
 
 .titlebar {
@@ -179,11 +179,13 @@ button svg {
 }
 
 #pre {
-    overflow: auto;
-    width: 100%;
+    margin: 0;
     padding: 10px;
-    height: auto;
     color: #bafff8;
+}
+
+code {
+    white-space: pre;
 }
 
 .curlies {
@@ -224,4 +226,9 @@ button svg {
 
 .s6 {
     color: #ffff00;
+}
+
+.cppcode {
+    height: calc(100% - 35px);
+    overflow: auto;
 }
