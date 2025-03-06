@@ -10,4 +10,13 @@ document.addEventListener('DOMContentLoaded', function() {
     document.getElementById('students-enrolled').textContent = stats.studentsEnrolled;
     document.getElementById('graduates').textContent = stats.graduates;
     document.getElementById('job-placement-rate').textContent = stats.jobPlacementRate + '%';
+
+     // Parallax effect
+     window.addEventListener('scroll', function() {
+        const scrolled = window.pageYOffset;
+        const parallaxElements = document.querySelectorAll('.parallax::before');
+        parallaxElements.forEach(function(element) {
+            element.style.transform = 'translateY(' + scrolled * 0.5 + 'px)';
+        });
+    });
 });
