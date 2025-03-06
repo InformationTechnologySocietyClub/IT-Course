@@ -4,17 +4,28 @@ body {
     padding: 0;
     background-color: #292E1E;
 }
+
 .container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
     width: 100%;
     overflow: hidden;
+    margin-top: 150px;
 }
+
 header {
     background: #333;
     color: #fff;
-    padding-top: 30px;
+    padding-top: 5px;
     min-height: 70px;
     border-bottom: #77aaff 3px solid;
     text-align: center;
+    position: fixed;
+    width: 100%;
+    top: 0;
+    z-index: 1000;
+    animation: slideIn 1s ease-in-out;
 }
 
 footer {
@@ -50,30 +61,44 @@ footer .apply-button:hover {
     background-color: #5599dd;
 }
 
-
 header h1 {
     text-align: center;
     text-transform: uppercase;
     margin: 0;
     font-size: 24px;
 }
+
 .card {
     padding: 20px;
     background: #fff;
-    margin-top: 20px;
-
+    margin: 20px;
     box-shadow: 0 0 10px rgba(0,0,0,0.1);
-    animation: fadeIn 2s;
+    animation: fadeIn 2s ease-in-out;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    width: 80%;
+    max-width: 800px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }
+
+.card:hover {
+    transform: scale(1.05);
+    box-shadow: 0 0 20px rgba(0,0,0,0.2);
+}
+
 .card img {
     width: 30%;
     height: auto;
     border-radius: 5px;
 }
+
+/* Fade-in animation for cards */
 @keyframes fadeIn {
-    from { opacity: 0; }
-    to { opacity: 1; }
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
 }
+
 .about-us {
     padding: 20px;
     background: #fff;
@@ -82,12 +107,14 @@ header h1 {
     box-shadow: 0 0 10px rgba(0,0,0,0.1);
     animation: fadeIn 2s;
 }
+
 .about-us img {
     width: 100%;
     height: auto;
     border-radius: 5px;
     margin-top: 15px;
 }
+
 .about-us h3 {
     color: #333;
     margin-top: 25px;
@@ -232,6 +259,29 @@ code {
 .cppcode {
     height: calc(100% - 35px);
     overflow: auto;
+}
+
+
+/* Hover animation for buttons */
+.apply-button {
+    display: inline-block;
+    padding: 10px 20px;
+    background-color: #77aaff;
+    color: #fff;
+    text-decoration: none;
+    border-radius: 5px;
+    transition: background-color 0.3s ease, transform 0.3s ease;
+}
+
+.apply-button:hover {
+    background-color: #5599dd;
+    transform: scale(1.05);
+}
+
+/* Slide-in animation for header */
+@keyframes slideIn {
+    from { transform: translateY(-100%); }
+    to { transform: translateY(0); }
 }
 
 /* From Uiverse.io by ilkhoeri */ 
