@@ -288,9 +288,7 @@ code {
 .terminal-card {
     padding: 1rem;
     overflow: hidden;
-    border: 1px solid #c5c5c5;
     border-radius: 12px;
-    background-color: #d9d9d92f;
     backdrop-filter: blur(8px);
     min-width: 344px;
   }
@@ -441,5 +439,23 @@ code {
 
 .show {
     opacity: 1;
+}
+
+#live-stats {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    padding: 1rem;
+}
+
+#live-stats p {
+    font-size: 1.2rem;
+    margin: 0;
+}
+
+#live-stats span {
+    font-weight: bold;
+    color: #2E0043;
+    font-size: 1.4rem;
 }
   
