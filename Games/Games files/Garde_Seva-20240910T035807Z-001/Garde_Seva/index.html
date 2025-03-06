@@ -1,0 +1,317 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kirby 2 Player Maze Game</title>
+    <style>
+        body {
+            position: relative;
+            background-image: url('bg3.jpg');
+            background-repeat: no-repeat;
+            background-attachment: fixed;
+            background-size: cover;
+            background-position: center;
+        }
+        #container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin-top: 60px;
+        }
+        canvas {
+            border: 2px solid #FFF;
+            background-image: url('bg4.png');
+            background-repeat: no-repeat;
+            background-attachment: fixed;
+            background-size: cover;
+            background-position: center;
+        }
+        #message {
+            position: absolute;
+            top: 80px;
+            font-family: Arial, Helvetica, sans-serif;
+            font-size: 24px;
+            color: rgb(234, 117, 250);
+            font-weight: bold;
+        }
+        #logo{
+            margin-top: 60px;
+            position: absolute;
+            height: 240px;
+            width: 550px;
+            background-image: url(logo.png);
+            background-repeat: no-repeat;
+            background-size: cover;
+            background-position: center;
+            margin: 20px 200px 20px 20px;
+            animation: logoMove 3s infinite;
+        }
+        @keyframes logoMove {
+            0% { top: 0px; }
+            50% { top: 30px; }
+            100% { top: 0px; }
+        }
+        #bgkirby{
+            margin-top: 500px;
+            position: absolute;
+            height: 240px;
+            width: 250px;
+            background-image: url(kirby1.png);
+            background-repeat: no-repeat;
+            background-size: cover;
+            background-position: center;
+            margin: 20px 200px 20px 20px;
+            animation: kirbyMove 3s infinite;
+            z-index: -5;
+        }
+        @keyframes kirbyMove {
+            0% { left: 30px; top: 500px; opacity: 0;}
+            10% { opacity: 1;}
+            50% { top: 580px;}
+            90% { opacity: 1;}
+            100% { left: 1400px; top: 500px; opacity: 0;}
+        }
+        #bgmetaknight{
+            margin-left: 200px;
+            margin-left: 1500px;
+            position: absolute;
+            height: 240px;
+            width: 250px;
+            background-image: url(meta1.png);
+            background-repeat: no-repeat;
+            background-size: cover;
+            background-position: center;
+            margin: 20px 200px 20px 20px;
+            animation: metaknightMove 5s infinite reverse;
+            z-index: -5;
+        }
+        @keyframes metaknightMove {
+            0% { left: 1500px; top: 240px}
+            50% { left: 1400px; top: 270px; }
+            100% { left: 1500px; top: 240px; }
+        }
+
+        #try-again-button {
+  font-size: 36px; /* Increase font size */
+  padding: 10px 20px; /* Add some padding to make the button larger */
+  border: none; /* Remove the default border */
+  border-radius: 10px; /* Add a rounded corner effect */
+  background-color: #4CAF50; /* Set a green background color */
+  color: #FFFFFF; /* Set white text color */
+  cursor: pointer; /* Change the cursor to a pointer on hover */
+}
+
+#try-again-button:hover {
+  background-color: #3e8e41; /* Set a darker green background color on hover */
+}
+    </style>
+</head>
+<body>
+    <div id="container">
+        <canvas id="gameCanvas" width="600" height="800"></canvas>
+        <div id="message"><button id="try-again-button">Try Again</button></div>
+        
+    </div>
+    <div id="bgkirby"></div>
+    <div id="bgmetaknight"></div> 
+    <div id="logo"></div>
+
+    <script>
+        let gameOver = false;
+        const canvas = document.getElementById('gameCanvas');
+        const ctx = canvas.getContext('2d');
+        const message = document.getElementById('message');
+
+        const player1Image = new Image();
+        player1Image.src = 'kirby.png'; 
+
+        const player2Image = new Image();
+        player2Image.src = 'metaknight.png'; 
+
+        const player1 = {
+            x: 50,
+            y: 50,
+            width: 55,
+            height: 50,
+            speed: 10
+        };
+
+        const player2 = {
+            x: 500,
+            y: 50,
+            width: 55,
+            height: 50,
+            speed: 10
+        };
+
+        const walls = [
+            { x: 0, y: 0, width: 600, height: 1 },
+            { x: 0, y: 0, width: 1, height: 150 },
+            { x: 600, y: 0, width: 1, height: 150 },
+            { x: 0, y: 150, width: 250, height: 10 },
+            { x: 350, y: 150, width: 250, height: 10 },
+            { x: 250, y: 150, width: 10, height: 150 },
+            { x: 350, y: 150, width: 10, height: 150 },
+            { x: 350, y: 300, width: 180, height: 10 },
+            { x: 70, y: 300, width: 190, height: 10 },
+            { x: 150, y: 380, width: 300, height: 10 },
+            { x: 150, y: 390, width: 10, height: 250 },
+            { x: 70, y: 300, width: 10, height: 420 },
+            { x: 520, y: 300, width: 10, height: 420 },
+            { x: 440, y: 390, width: 10, height: 250 },
+            { x: 150, y: 640, width: 300, height: 10},
+            { x: 70, y: 720, width: 190, height: 10},
+            { x: 350, y: 720, width: 180, height: 10},
+            { x: 250, y: 720, width: 10, height: 90},
+            { x: 350, y: 720, width: 10, height: 90},
+        ];
+
+        const finishLine = {
+            x: 260,
+            y: 770,
+            width: 90,
+            height: 10,
+            color: '#FF6E6E'
+        };
+
+        function drawPlayers() {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            drawWalls();
+            drawFinishLine();
+            drawPlayer(player1, player1Image); 
+            drawPlayer(player2, player2Image); 
+        }
+
+        function drawPlayer(player, image) {
+            ctx.drawImage(image, player.x, player.y, player.width, player.height);
+        }
+
+        function drawWalls() {
+            ctx.fillStyle = '#8BF2FF';
+            for (const wall of walls) {
+                ctx.fillRect(wall.x, wall.y, wall.width, wall.height);
+            }
+        }
+
+        function drawFinishLine() {
+            ctx.fillStyle = finishLine.color;
+            ctx.fillRect(finishLine.x, finishLine.y, finishLine.width, finishLine.height);
+        }
+
+        function checkCollision(x, y, player) {
+            for (const wall of walls) {
+                if (x < wall.x + wall.width &&
+                    x + player.width > wall.x &&
+                    y < wall.y + wall.height &&
+                    y + player.height > wall.y) {
+                    return true;
+                }
+            }
+            return false;
+        }
+
+        function checkWin(player) {
+            return (player.x < finishLine.x + finishLine.width &&
+                    player.x + player.width > finishLine.x &&
+                    player.y < finishLine.y + finishLine.height &&
+                    player.y + player.height > finishLine.y);
+        }
+
+        function animateSpawn(player, targetX, targetY) {
+            const startX = player.x;
+            const startY = player.y;
+            const duration = 500; 
+            const startTime = performance.now();
+
+            function animate(time) {
+                const elapsedTime = time - startTime;
+                const progress = Math.min(elapsedTime / duration, 1);
+
+                player.x = startX + (targetX - startX) * progress;
+                player.y = startY + (targetY - startY) * progress;
+
+                drawPlayers();
+
+                if (progress < 1) {
+                    requestAnimationFrame(animate);
+                }
+            }
+
+            requestAnimationFrame(animate);
+        }
+
+        function movePlayer(player, newX, newY) {
+            if (!checkCollision(newX, newY, player)) {
+                player.x = newX;
+                player.y = newY;
+            } else {
+                if (player === player1) { 
+                    animateSpawn(player, 50, 50);
+                } else if (player === player2) { // Player 2
+                    animateSpawn(player, 500, 50);
+                }
+            }
+
+            if (checkWin(player)) {
+                message.textContent = player === player1 ? 'Player 1 (Kirby) Wins!' : 'Player 2 (Meta Knight) Wins!';
+                window.removeEventListener('keydown', handleKeydown); 
+            } else {
+                drawPlayers();
+            }
+        }
+
+        function handleKeydown(event) {
+            switch (event.key) {
+                case 'ArrowUp':
+                    movePlayer(player1, player1.x, player1.y - player1.speed);
+                    break;
+                case 'ArrowDown':
+                    movePlayer(player1, player1.x, player1.y + player1.speed);
+                    break;
+                case 'ArrowLeft':
+                    movePlayer(player1, player1.x - player1.speed, player1.y);
+                    break;
+                case 'ArrowRight':
+                    movePlayer(player1, player1.x + player1.speed, player1.y);
+                    break;
+                case 'w':
+                    movePlayer(player2, player2.x, player2.y - player2.speed);
+                    break;
+                case 's':
+                    movePlayer(player2, player2.x, player2.y + player2.speed);
+                    break;
+                case 'a':
+                    movePlayer(player2, player2.x - player2.speed, player2.y);
+                    break;
+                case 'd':
+                    movePlayer(player2, player2.x + player2.speed, player2.y);
+                    break;
+            }
+        }
+
+        window.addEventListener('keydown', handleKeydown);
+
+        player1Image.onload = function() {
+            player2Image.onload = function() {
+                drawPlayers();
+            };
+        };
+        const tryAgainButton = document.getElementById('try-again-button');
+
+tryAgainButton.addEventListener('click', () => {
+  // Reset game state
+  player1.x = 50;
+  player1.y = 50;
+  player2.x = 500;
+  player2.y = 50;
+  message.textContent = '';
+  tryAgainButton.style.display = 'none'; // Hide the button
+
+  // Restart the game
+  drawPlayers();
+  window.addEventListener('keydown', handleKeydown);
+});
+    </script>
+</body>
+</html>
