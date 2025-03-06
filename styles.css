@@ -470,4 +470,104 @@ code {
     z-index: -1;
     pointer-events: auto;
 }
+
+.career-paths {
+    display: flex;
+    justify-content: space-around;
+    gap: 2rem;
+    margin: 2rem 0;
+    flex-wrap: wrap;
+}
+
+.book {
+    position: relative;
+    border-radius: 10px;
+    width: 280px;
+    height: 350px;
+    background-color: #fff;
+    box-shadow: 1px 1px 12px rgba(0, 0, 0, 0.2);
+    transform: preserve-3d;
+    perspective: 2000px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #2E0043;
+}
+
+.book-content {
+    padding: 2rem;
+    text-align: center;
+}
+
+.book-content h4 {
+    margin-bottom: 1rem;
+    color: #2E0043;
+    font-size: 1.3rem;
+}
+
+.book-content p {
+    font-size: 0.95rem;
+    line-height: 1.5;
+    color: #333;
+}
+
+.cover {
+    top: 0;
+    position: absolute;
+    background-color: #fff;
+    width: 100%;
+    height: 100%;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: all 0.5s;
+    transform-origin: 0;
+    box-shadow: 1px 1px 12px rgba(0, 0, 0, 0.2);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 1rem;
+    padding: 1rem;
+}
+
+.book:hover .cover {
+    transition: all 0.5s;
+    transform: rotatey(-80deg);
+}
+
+.cover .icon-container {
+    width: 180px;
+    height: 180px;
+    margin-bottom: 1rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.cover .icon-container object {
+    width: 100%;
+    height: 100%;
+}
+
+/* Remove the old img styles and replace with these */
+.cover img {
+    display: none;
+}
+
+.cover h4 {
+    color: #2E0043;
+    font-size: 1.2rem;
+    text-align: center;
+}
+
+@media (max-width: 768px) {
+    .career-paths {
+        flex-direction: column;
+        align-items: center;
+    }
+    
+    .book {
+        margin-bottom: 2rem;
+    }
+}
   
