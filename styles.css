@@ -5,8 +5,7 @@ body {
     background-color: #292E1E;
 }
 .container {
-    width: 80%;
-    margin: auto;
+    width: 100%;
     overflow: hidden;
 }
 header {
@@ -16,6 +15,41 @@ header {
     min-height: 70px;
     border-bottom: #77aaff 3px solid;
 }
+
+footer {
+    background: #333;
+    color: #fff;
+    padding: 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-top: #77aaff 3px solid;
+}
+
+footer .contact, footer .cta {
+    flex: 1;
+    padding: 0 20px;
+}
+
+footer .contact h2, footer .cta h2 {
+    margin-top: 0;
+}
+
+footer .apply-button {
+    display: inline-block;
+    padding: 10px 20px;
+    background-color: #77aaff;
+    color: #fff;
+    text-decoration: none;
+    border-radius: 5px;
+    transition: background-color 0.3s ease;
+}
+
+footer .apply-button:hover {
+    background-color: #5599dd;
+}
+
+
 header h1 {
     text-align: center;
     text-transform: uppercase;
@@ -26,7 +60,7 @@ header h1 {
     padding: 20px;
     background: #fff;
     margin-top: 20px;
-    border-radius: 5px;
+
     box-shadow: 0 0 10px rgba(0,0,0,0.1);
     animation: fadeIn 2s;
 }
